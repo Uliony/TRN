@@ -1,0 +1,8 @@
+model_utils/__pycache__/
+eval-logs/
+kernel_meta/
+rank_0/
+train-logs/
+.ipynb_checkpoints/
+*.pth
+*.ckpt

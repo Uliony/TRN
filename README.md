@@ -1,4 +1,31 @@
-[toc]
+# 目录
+
+- [目录](#目录)
+- [1. 模型介绍](#1-模型介绍)
+  - [1.1. 网络模型结构](#11-网络模型结构)
+  - [1.2. 数据集](#12-数据集)
+    - [1.2.1. 数据集介绍](#121-数据集介绍)
+    - [1.2.2. 准备数据集](#122-准备数据集)
+      - [下载 Jester 数据集](#下载-jester-数据集)
+    - [1.2.3. 对数据集进行解压](#123-对数据集进行解压)
+    - [1.2.4. 准备数据集标记文件](#124-准备数据集标记文件)
+  - [1.3. 代码提交地址](#13-代码提交地址)
+  - [其他](#其他)
+- [2. 代码目录结构说明](#2-代码目录结构说明)
+  - [2.1. 脚本参数](#21-脚本参数)
+- [3. 自验结果](#3-自验结果)
+  - [3.1. 自验环境](#31-自验环境)
+  - [3.2. 训练超参数](#32-训练超参数)
+  - [3.3. 训练](#33-训练)
+    - [3.3.1. 训练之前](#331-训练之前)
+    - [3.3.2. 启动训练脚本](#332-启动训练脚本)
+    - [3.3.3. 训练精度结果](#333-训练精度结果)
+  - [3.4. 评估过程](#34-评估过程)
+    - [3.4.1. 启动评估脚本](#341-启动评估脚本)
+      - [3.4.2. 评估精度结果](#342-评估精度结果)
+- [4. 参考资料](#4-参考资料)
+  - [4.1. 参考论文](#41-参考论文)
+  - [4.2. 参考 git 项目](#42-参考-git-项目)
 
 # [1. 模型介绍](#contents)
 
@@ -10,7 +37,7 @@ Temporal Relational Reasoning in Videos. arXiv:1711.08496v2 [cs.CV] 25 Jul 2018.
 
 ## [1.1. 网络模型结构](#contents)
 
-该模型使用了BNInception主干。最后一个全连接层用代替Dropout和FC层匹配必要数量的特征，从视频帧中提取。TRN头由感知器层组成，感知器层从帧特征的不同组合中聚合特征。
+该模型使用了 BNInception 主干。最后一个全连接层用代替 Dropout 和 FC 层匹配必要数量的特征，从视频帧中提取。TRN 头由感知器层组成，感知器层从帧特征的不同组合中聚合特征。
 
 ## [1.2. 数据集](#contents)
 
@@ -20,10 +47,10 @@ Temporal Relational Reasoning in Videos. arXiv:1711.08496v2 [cs.CV] 25 Jul 2018.
 
 - 数据集链接: [Jester](https://developer.qualcomm.com/software/ai-datasets/jester)
 - Jester 数据集的大小: 22.9GB, 148,092 videos (37 frames each), 27 classes
-  - Train: 18,3GB, 118,562 videos
-  - Validation: 2,3GB，14,787 videos
-  - Test: 2,3GB, 14,743 videos
-  - 数据格式: 带有视频帧的文件夹
+    - Train: 18,3GB, 118,562 videos
+    - Validation: 2,3GB，14,787 videos
+    - Test: 2,3GB, 14,743 videos
+    - 数据格式: 带有视频帧的文件夹
 
 ### 1.2.2. 准备数据集
 
@@ -148,6 +175,14 @@ unpacked_JESTER/
  └── val_videofolder.txt
 ```
 
+## [1.3. 代码提交地址](contents)
+
+https://git.openi.org.cn/youlz/TRN.git
+
+## [其他](contents)
+
+日志文件保存在提交的 **log.zip** 中
+
 # [2. 代码目录结构说明](#contents)
 
 ```text
@@ -264,6 +299,10 @@ bash scripts/run_train_npu.sh [DEVICE_ID] [DATASET_ROOT] [PRETRAIN_BNINCEPTION_C
 
 如果使用 Shell 脚本, 日志信息和 checkpoint 将会保存到 **./train-logs** 目录下
 
+### [3.3.3. 训练精度结果](contents)
+
+训练日志文件储存在提交的 **train-logs** 目录下。
+
 ## [3.4. 评估过程](#contents)
 
 ### [3.4.1. 启动评估脚本](contents)
@@ -278,5 +317,21 @@ bash scripts/run_eval_npu.sh [DATASET_ROOT] [CKPT_PATH]
 >
 > CKPT_PATH - 训练好的 TRN - MultiScale 模型的路径
 
-评估日志文件储存在提交的 **eval-output** 目录下。
+#### [3.4.2. 评估精度结果](contents)
 
+```text
+2022-10-09 11:55:46,141:INFO:Top1: 94.82%
+2022-10-09 11:55:46,142:INFO:Top5: 99.81%
+```
+
+评估日志文件将会储存在 **./eval-output** 目录下。
+
+# [4. 参考资料](#contents)
+
+## [4.1. 参考论文](contents)
+
+https://arxiv.org/pdf/1711.08496v2.pdf
+
+## [4.2. 参考 git 项目](contents)
+
+https://github.com/zhoubolei/TRN-pytorch
